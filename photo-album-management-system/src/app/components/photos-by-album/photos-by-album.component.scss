@@ -1,0 +1,366 @@
+// Import variables and mixins
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+@import '/src/styles/fonts';
+
+::-webkit-scrollbar {
+    width     : 0px;
+    background: transparent;
+}
+
+a.active i {
+    color: $black;
+}
+
+i {
+    color: $grey;
+}
+
+#photos-header {
+    grid-column-start: 1;
+    grid-column-end  : -1;
+}
+
+#header-content {
+    @include flexHorizontalVertical(space-between, center);
+
+    margin: {
+        bottom: 4%;
+        top   : 4%;
+    }
+
+    width: 100%;
+
+    &>h1 {
+        @include styleDimensions(758px, 76px);
+        @include styleCommon(78px, $black, 64px, "otherFont", 100);
+    }
+}
+
+#search-section {
+    grid: {
+        column-start: 1;
+        column-end  : 4;
+    }
+}
+
+.md-form.mt-0 {
+    width: 500px;
+    @include flexY(center);
+}
+
+.material-icons.search-icon {
+    position: absolute;
+}
+
+i.material-icons.search-icon {
+    font-size: 40px;
+}
+
+.search-icon {
+    &+input {
+        @include styleDimensions(500px, 40px);
+        padding-left : 35px;
+        border       : none;
+        border-bottom: 2px solid $black;
+
+        &::placeholder {
+            @include styleDimensions(91px, 35px);
+            @include styleCommon(36px, #C7C7C7, 30px, "otherFont", 100);
+        }
+    }
+}
+
+#photos-grid {
+    @include flexX(space-between);
+    flex-wrap : wrap;
+    margin-top: 5%;
+}
+
+.photo-card {
+    flex-basis: 33.33%;
+    padding   : 20px 0px;
+}
+
+.height-image {
+    height: 200px;
+}
+
+.photo-list-info {
+    @include flexDirection(column);
+    padding        : 0 10px 0 10px;
+    justify-content: space-around;
+}
+
+.photo-list-title {
+    width: 90%;
+    @include styleCommon(39px, $black, 32px, "otherFont", 100);
+}
+
+.delete-button {
+    border    : none;
+    background: transparent;
+    width     : 20px;
+
+    i {
+        font-size: 28px;
+
+        &:hover {
+            cursor: pointer;
+            color : $orange;
+        }
+    }
+}
+
+.modal-title {
+    @include styleDimensions(1328px, 76px);
+    @include styleCommon(78px, $black, 64px, "otherFont", 100);
+}
+
+.delete {
+    border    : none;
+    background: transparent;
+    width     : 20px;
+
+    i {
+        font-size: 28px;
+
+        &:hover {
+            cursor: pointer;
+            color : $orange;
+        }
+    }
+}
+
+.delete-buttons {
+    display        : flex;
+    justify-content: center;
+    align-items    : baseline;
+
+    button {
+        background: transparent;
+        border    : none;
+    }
+}
+
+.confirm-button,
+.cancel-button {
+    @include styleDimensions(103px, 76px);
+    @include styleCommon(78px, $black, 64px, "otherFont", 100);
+
+    &:hover {
+        cursor: pointer;
+        color : $orange;
+    }
+}
+
+.dot {
+    @include styleDimensions(6px, 6px);
+    background-color: #030303;
+}
+
+#photos-list {
+    margin-top: 5%;
+}
+
+.close {
+    color      : white;
+    position   : absolute;
+    top        : 10px;
+    right      : 25px;
+    font-size  : 35px;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+        color          : #888888;
+        text-decoration: none;
+        cursor         : pointer;
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.prev-slide,
+.next-slide {
+    cursor             : pointer;
+    position           : absolute;
+    top                : 50%;
+    width              : auto;
+    padding            : 18px;
+    margin-top         : -50px;
+    color              : white !important;
+    font-weight        : bold;
+    font-size          : 20px;
+    transition         : 0.8s ease;
+    border-radius      : 0 5px 5px 0;
+    user-select        : none;
+    -webkit-user-select: none;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+.next-slide {
+    right        : 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.lightbox-content {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+}
+
+.img-slides {
+    width          : 100%;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+}
+
+.photo-info {
+    width  : 95%;
+    padding: 7px;
+    @include flexDirection(column);
+    justify-content: space-between;
+    @include flexDirection(row);
+    justify-content: space-around;
+    padding        : 10px;
+}
+
+.photo-title {
+    width: 90%;
+    @include styleCommon(39px, $black, 32px, "otherFont", 100);
+}
+
+.list {
+    width: 100%;
+    @include flexX(flex-start);
+    margin-bottom: 3%;
+}
+
+
+@media screen and (max-width: 1024px) {
+    #photos-header {
+        display        : flex;
+        flex-direction : column;
+        justify-content: space-between;
+        align-content  : center;
+    }
+
+    #header-content {
+        flex-direction : column;
+        justify-content: space-between;
+    }
+
+    #header-content {
+        &>h1 {
+            width     : 100%;
+            height    : fit-content;
+            text-align: center;
+        }
+    }
+
+    #search-section {
+        display        : flex;
+        justify-content: center;
+    }
+
+    .photo-card {
+        padding: 10px;
+    }
+
+    .list {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #header-content {
+        flex-direction : column;
+        justify-content: space-between;
+    }
+
+    #view-mode-icons {
+        & a:first-child {
+            margin-right: 10px;
+        }
+    }
+
+    .photo-card {
+        flex-basis: 50%;
+    }
+
+    .photo-list-info {
+        padding: 4px 4px 10px 10px;
+    }
+
+    .photo-list-title {
+        font-size: 24px;
+    }
+
+    .photo-title {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #photos-container {
+        display        : flex;
+        flex-direction : column;
+        justify-content: space-between;
+    }
+
+    #wrapper-heading {
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+        width          : 100%;
+    }
+
+    #view-mode-icons {
+        width: auto;
+    }
+
+    #search-section {
+        width: 50%;
+    }
+
+    .md-form.mt-0 {
+        width     : 0;
+        margin-top: 30px;
+    }
+
+    #photos-grid {
+        margin-top: 10%;
+    }
+
+    .photo-card {
+        flex-basis     : 100%;
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+    }
+
+    .photo-list-title {
+        font-size  : 18px;
+        line-height: normal;
+    }
+
+    #photos-list {
+        margin-top: 10%;
+    }
+
+    .align-item {
+        display: flex;
+    }
+
+    .photo-title {
+        font-size  : 18px;
+        line-height: normal;
+    }
+}

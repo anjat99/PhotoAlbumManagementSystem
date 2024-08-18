@@ -1,0 +1,112 @@
+<div class="container" id="photos-container">
+    <div id="photos-header">
+        <div id="wrapper-heading">
+            <div id="header-content">
+                <a class="back-link" href="/albums">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <h1>Family Marković Photo Albums</h1>
+                <div id="view-mode-icons">
+                    <a (click)="changeDisplayMode(1)" [ngClass]="{'active': currentDisplayMode === 1}">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                    <a (click)="changeDisplayMode(2)" [ngClass]="{'active': currentDisplayMode === 2}">
+                        <i class="fas fa-grip-lines"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div id="search-section">
+                <div class="md-form mt-0">
+                    <i class="material-icons search-icon">search</i>
+                    <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchTerm"
+                        name="searchTerm" />
+                </div>
+            </div>
+        </div>
+
+        <div id="photos-grid" *ngIf="currentDisplayMode === 1" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="100" (scrolled)="loadMorePhotos()" [scrollWindow]="false"
+            style="height: 400px; overflow-y: scroll;">
+            <div class="photo-card" *ngFor="let photo of displayedPhotos | filter:searchTerm; index as i">
+                <a (click)="openLightbox(photo.id); setCurrentSlide(i + 1)">
+                    <img [src]="photo.thumbnailUrl" [alt]="photo.title"
+                        class="img-photo open-image height-image">
+                </a>
+                <div class="photo-info">
+                    <h2 class="photo-title">{{ photo.title | titlecase }}</h2>
+                    <button (click)="openModal(photo.id)" class="delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+
+
+                <jw-modal [id]="photo.id">
+                    <div class="modal-content">
+                        <h1 class="modal-title">Are you sure you want to delete ("{{ photo.title }}")?</h1>
+                    </div>
+                    <div class="delete-buttons">
+                        <button (click)="deletePhoto(photo.id)" class="confirm-button">Da</button>
+                        <span class="dot"> . </span>
+                        <button (click)="closeModal(photo.id);" class="cancel-button">Ne</button>
+                    </div>
+                </jw-modal>
+
+                <app-lightbox-gallery [id]="photo.id" [isLightboxEnabled]="isLightboxEnabled">
+                    <div id="lightbox{{ photo.id }}" class="lightbox-modal">
+                        <span class="close-button" (click)="closeLightbox(photo.id)">&times;</span>
+                        <div class="lightbox-content">
+                            <div class="img-slides">
+                                <img [src]="photo.url" alt="{{ photo.title }}">
+                            </div>
+                            <a class="prev-slide" (click)="changeSlide(-1)">&#10094;</a>
+                            <a class="next-slide" (click)="changeSlide(1)">&#10095;</a>
+                        </div>
+                    </div>
+                </app-lightbox-gallery>
+            </div>
+        </div>
+
+        <div id="photos-list" *ngIf="currentDisplayMode === 2" infiniteScroll [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="100" (scrolled)="loadMorePhotos()" [scrollWindow]="false"
+            style="height: 400px; overflow-y: scroll;">
+            <div class="list align-item photo-list-item"
+                *ngFor="let photo of displayedPhotos | filter:searchTerm; index as i">
+                <a (click)="openLightbox(photo.id); setCurrentSlide(i + 1)">
+                    <img [src]="photo.thumbnailUrl" [alt]="photo.title"
+                        class="img-photo-list open-image height-image">
+                </a>
+                <div class="photo-list-info">
+                    <h2 class="photo-list-title">{{ photo.title | titlecase }}</h2>
+                    <button (click)="openModal(photo.id)" class="delete-button">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+
+                <jw-modal [id]="photo.id">
+                    <div class="modal-content">
+                        <h1 class="modal-title">Are you sure you want to delete ("{{ photo.title }}")?</h1>
+                    </div>
+                    <div class="delete-buttons">
+                        <button (click)="deletePhoto(photo.id)" class="confirm-button">Da</button>
+                        <span class="dot"> . </span>
+                        <button (click)="closeModal(photo.id);" class="cancel-button">Ne</button>
+                    </div>
+                </jw-modal>
+
+                <app-lightbox-gallery [id]="photo.id" [isLightboxEnabled]="isLightboxEnabled">
+                    <div id="lightbox{{ photo.id }}" class="lightbox-modal">
+                        <span class="close cursor" (click)="closeLightbox(photo.id)">&times;</span>
+                        <div class="lightbox-content">
+                            <div class="img-slides">
+                                <img [src]="photo.url" alt="{{ photo.title }}">
+                            </div>
+                            <a class="prev-slide" (click)="changeSlide(-1)">&#10094;</a>
+                            <a class="next-slide" (click)="changeSlide(1)">&#10095;</a>
+                        </div>
+                    </div>
+                </app-lightbox-gallery>
+            </div>
+        </div>
+    </div>
+</div>

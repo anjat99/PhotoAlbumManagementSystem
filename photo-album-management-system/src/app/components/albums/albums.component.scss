@@ -1,0 +1,171 @@
+// Import variables and mixins
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+@import '/src/styles/fonts';
+
+a.active i {
+    color: black;
+}
+
+i {
+    color: grey;
+}
+
+#photo-album-grid {
+    grid-column-start: 1;
+    grid-column-end  : -1;
+}
+
+#album-header {
+    @include flexHorizontalVertical(space-between, center);
+
+    margin: {
+        bottom: 4%;
+        top   : 4%;
+    }
+
+    width: 100%;
+
+    &>h1 {
+        @include styleDimensions(758px, 76px);
+        @include styleCommon(78px, $black, 64px, "otherFont", 100);
+    }
+}
+
+.album-info {
+    width  : 95%;
+    padding: 7px;
+    @include flexDirection(column);
+    justify-content: space-between;
+}
+
+#view-toggle-icons {
+    float    : right;
+    font-size: 40px;
+    @include flexX(space-between);
+    width: 8%;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    & a:first-child {
+        color: $black;
+    }
+
+    & a:last-child {
+        color: #E5E5E5;
+    }
+}
+
+#albums-grid {
+    @include flexX(space-between);
+    flex-wrap: wrap;
+}
+
+.album-card {
+    flex-basis: 33.33%;
+    padding   : 20px 0px;
+}
+
+.list-item-title {
+    width: 100%;
+    @include styleCommon(39px, $black, 32px, "otherFont", 100);
+
+    &:hover {
+        color: $orange;
+    }
+}
+
+.album-creator {
+    @include styleDimensions(100%, 21px);
+    @include styleCommon(22px, $grey, 18px, "textFont", 300);
+}
+
+#albums-list {
+    @include flexX(space-evenly);
+    flex-wrap: wrap;
+}
+
+.list-item {
+    width: 100%;
+    @include flexX(flex-start);
+    margin-bottom: 3%;
+}
+
+.list-item-info {
+    @include flexDirection(column);
+    padding: 10px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    #photo-album-grid {
+        display        : flex;
+        flex-direction : column;
+        justify-content: space-between;
+        align-content  : center;
+    }
+
+    #album-header {
+        flex-direction : column;
+        justify-content: space-between;
+
+        & > h1 {
+            width     : 100%;
+            height    : fit-content;
+            text-align: center;
+        }
+    }
+
+    .album-card {
+        padding: 10px;
+    }
+
+    .list-item {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #album-header {
+        flex-direction : column;
+        justify-content: space-between;
+    }
+
+    #view-toggle-icons {
+        & a:first-child {
+            margin-right: 10px;
+        }
+    }
+
+    .album-card {
+        flex-basis: 50%;
+    }
+
+    .list-item-title {
+        font-size: 24px;
+    }
+
+    .centered-image {
+        display: flex;
+    }
+
+    .list-item-info {
+        padding: 4px 4px 10px 10px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .album-card {
+        flex-basis     : 100%;
+        display        : flex;
+        flex-direction : column;
+        justify-content: center;
+    }
+
+    .list-item-title {
+        font-size  : 18px;
+        line-height: normal;
+    }
+}

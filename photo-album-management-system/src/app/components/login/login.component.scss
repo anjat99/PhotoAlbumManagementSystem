@@ -1,0 +1,97 @@
+// Import variables and mixins
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+@import '/src/styles/fonts';
+
+#login-screen {
+    grid-column-start: 3;
+    grid-column-end  : 9;
+}
+
+.login-header {
+    height       : 76px;
+    margin-bottom: 30px;
+    @include styleCommon(78px, $black, 64px, "textFont", 100);
+}
+
+.form-group {
+    padding      : 20px 0px;
+    position     : relative;
+    margin-bottom: 20px;
+
+    &>label {
+
+        &.username,
+        &.email {
+            height: 38px;
+            @include styleCommon(39px, $black, 32px, "textFont", 100);
+            display: none;
+        }
+    }
+
+    &:focus-within {
+        & label {
+
+            &.username,
+            &.email {
+                &.form-label {
+                    position: absolute;
+                    display : block;
+                    top     : -20px;
+                }
+            }
+        }
+
+        & .field-wrapper {
+            height: 50px;
+        }
+    }
+}
+
+.error-message {
+    color      : rgb(245, 8, 0);
+    font-weight: bold;
+    font-size  : 20px;
+    padding    : 10px;
+}
+
+.form-input {
+    &::placeholder {
+        height: 38px;
+        @include styleCommon(39px, $black, 32px, "textFont", 100);
+    }
+
+    &:focus-within {
+        &::placeholder {
+            color: transparent;
+        }
+    }
+}
+
+.field-wrapper {
+    width        : 540px;
+    border       : none;
+    border-bottom: 2px solid $black;
+    padding      : 10px;
+    font-size    : 20px;
+}
+
+.submit-button {
+    &:active,
+    &:focus,
+    &:hover {
+        outline: none;
+        cursor : pointer;
+    }
+}
+
+.button {
+    @include styleDimensions(540px, 81px);
+    background-color: $orange;
+}
+
+.button-text {
+    @include styleDimensions(111px, 24px);
+    @include styleCommon(25px, $white, 20px, 'btnFont', bold, 7.27px);
+    text-transform: uppercase;
+}

@@ -1,0 +1,43 @@
+@mixin flexHorizontalVertical ($x, $y) {
+    display        : flex;
+    justify-content: $x;
+    align-items    : $y;
+}
+
+@mixin flexDirection($direction) {
+    display       : flex;
+    flex-direction: $direction;
+}
+
+@mixin flexX($x) {
+    display        : flex;
+    justify-content: $x;
+}
+
+@mixin flexY($y) {
+    display    : flex;
+    align-items: $y;
+}
+
+@mixin styleDisplay ($display, $justifyContent, $alignItems) {
+    display        : $display;
+    justify-content: $justifyContent;
+    align-items    : $alignItems;
+}
+
+@mixin styleDimensions ($width, $height) {
+    width : $width;
+    height: $height;
+}
+
+@mixin styleCommon ($lineHeight, $color, $fontSize, $fontFamily, $fontWeight, $letterSpacing:0) {
+    line-height   : $lineHeight;
+    color         : $color;
+    letter-spacing: $letterSpacing;
+
+    font: {
+        family: $fontFamily;
+        size  : $fontSize;
+        weight: $fontWeight
+    }
+}

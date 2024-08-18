@@ -1,0 +1,66 @@
+@import '/src/styles/variables';
+@import '/src/styles/mixins';
+@import '/src/styles/fonts';
+
+/** COMMON STYLES **/
+
+* {
+    padding   : 0;
+    margin    : 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    height    : 100vh;
+    background: $white;
+    color     : $black;
+}
+
+.container {
+    @include styleDimensions(100%, 100%);
+    @include styleDisplay(grid, center, center);
+    margin               : auto;
+    grid-template-columns: repeat(12, 68px);
+    grid-column-gap      : 28px;
+
+    & a.back-link {
+        @include styleDimensions(68px, 21px);
+        @include styleCommon(22px, $black, 18px, "textFont", 300);
+        display        : flex;
+        justify-content: space-around;
+        text-decoration: none;
+        position       : absolute;
+        top            : 15px;
+    }
+}
+
+.img-photo {
+    width: 95%;
+}
+
+.open-image {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        display: block;
+    }
+
+    .container a.back-link {
+        position: static;
+    }
+}
+
+
+@media screen and (max-width: 425px) {
+    .img-photo-list {
+        display: flex;
+    }
+}

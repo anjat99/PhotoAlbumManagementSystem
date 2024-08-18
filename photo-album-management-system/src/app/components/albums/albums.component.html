@@ -1,0 +1,44 @@
+<div class="container">
+    <div id="photo-album-grid">
+        <div id="album-header">
+            <h1>Family Marković Photo Albums</h1>
+            <div id="view-toggle-icons">
+                <a (click)="onDisplayModeChange(1)" [ngClass]="{'active': displayMode === 1}">
+                    <i class="fas fa-th-large"></i>
+                </a>
+                <a (click)="onDisplayModeChange(2)" [ngClass]="{'active': displayMode === 2}">
+                    <i class="fas fa-grip-lines"></i>
+                </a>
+            </div>
+        </div>
+
+        <div id="albums-grid" *ngIf="displayMode === 1">
+            <div class="album-card" *ngFor="let album of albums" [attr.data-message-id]="album.id">
+                <a [routerLink]="['/album', album.id]">
+                    <img src="{{ album.thumbnail }}" alt="{{ album.title }}" class="img-photo open-image">
+                </a>
+                <div class="album-info">
+                    <a [routerLink]="['/album', album.id]">
+                        <h2 class="list-item-title">{{ album.title | titlecase}}</h2>
+                    </a>
+                    <h3 class="album-creator">created by: {{ album.username }}</h3>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="albums-list" *ngIf="displayMode === 2">
+            <div class="list-item" *ngFor="let album of albums">
+                <a [routerLink]="['/album', album.id]" class="centered-image">
+                    <img src="{{ album.thumbnail }}" alt="{{ album.title }}" class="img-photo-list open-image">
+                </a>
+                <div class="list-item-info">
+                    <a [routerLink]="['/album', album.id]">
+                        <h2 class="list-item-title">{{ album.title | titlecase}}</h2>
+                    </a>
+                    <h3 class="album-creator">created by: {{ album.username }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
